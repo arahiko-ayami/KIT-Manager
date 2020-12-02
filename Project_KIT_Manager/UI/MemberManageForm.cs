@@ -96,10 +96,13 @@ namespace KIT_Manager.UI
 
         private void getGender(string gender)
         {
-            if (radioButtonMale.Text.Equals(gender))
-                radioButtonMale.Checked = true;
-            else if (radioButtonFemale.Text.Equals(gender))
-                radioButtonFemale.Checked = true;
+            if (gender != string.Empty)
+            {
+                if (radioButtonMale.Text.Equals(gender))
+                    radioButtonMale.Checked = true;
+                else if (radioButtonFemale.Text.Equals(gender))
+                    radioButtonFemale.Checked = true;
+            }
         }
 
         private void QueryByClass(string data)
@@ -114,21 +117,31 @@ namespace KIT_Manager.UI
 
         private void AddData()
         {
-            MemberDataContext db = new MemberDataContext();
-            Member newMember = new Member()
+            try
             {
-                StudentID = textBoxStudentID.Text,
-                Name = textBoxName.Text,
-                Birthday = dateTimePicker.Value,
-                Class = textBoxClass.Text,
-                Gender = setGender(),
-                Note = richTextBoxNote.Text,
-                PhoneNumber = textBoxPhoneNum.Text
-            };
+                if (textBoxStudentID.Text != String.Empty && textBoxName.Text != string.Empty)
+                {
+                    MemberDataContext db = new MemberDataContext();
+                    Member newMember = new Member()
+                    {
+                        StudentID = textBoxStudentID.Text,
+                        Name = textBoxName.Text,
+                        Birthday = dateTimePicker.Value,
+                        Class = textBoxClass.Text,
+                        Gender = setGender(),
+                        Note = richTextBoxNote.Text,
+                        PhoneNumber = textBoxPhoneNum.Text
+                    };
 
-            db.Members.InsertOnSubmit(newMember);
-            db.SubmitChanges();
-            LoadData();
+                    db.Members.InsertOnSubmit(newMember);
+                    db.SubmitChanges();
+                    LoadData();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void Delete(String StudentID)
@@ -170,7 +183,10 @@ namespace KIT_Manager.UI
                 oldName = textBoxName.Text = dataGridView.Rows[rowNo].Cells[1].Value.ToString();
                 textBoxPhoneNum.Text = dataGridView.Rows[rowNo].Cells[2].Value.ToString();
                 textBoxClass.Text = dataGridView.Rows[rowNo].Cells[3].Value.ToString();
-                getGender(dataGridView.Rows[rowNo].Cells[4].Value.ToString());
+                if (dataGridView.Rows[rowNo].Cells[4].Value != null)
+                    getGender(dataGridView.Rows[rowNo].Cells[4].Value.ToString());
+                else
+                    radioButtonMale.Checked = radioButtonFemale.Checked = false;
                 dateTimePicker.Value = DateTime.Parse(dataGridView.Rows[rowNo].Cells[5].Value.ToString());
                 richTextBoxNote.Text = dataGridView.Rows[rowNo].Cells[6].Value.ToString();
             }
