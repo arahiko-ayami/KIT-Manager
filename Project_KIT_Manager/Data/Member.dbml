@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="KIT" Class="MemberDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-BPLD1FU;Initial Catalog=KIT;Integrated Security=True" SettingsObjectName="Project_KIT_Manager.Properties.Settings" SettingsPropertyName="KITConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Member" Member="Members">
+    <Type Name="Member">
+      <Column Name="StudentID" Type="System.String" DbType="VarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Class" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="Birthday" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Association Name="Member_Project" Member="Projects" ThisKey="StudentID" OtherKey="ProjectLeaderID" Type="Project" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Project" Member="Projects">
+    <Type Name="Project">
+      <Column Name="ProjectID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProjectName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ProjectDescribe" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="ProjectLeaderID" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ProjectLeaderName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Member_Project" Member="Member" ThisKey="ProjectLeaderID" OtherKey="StudentID" Type="Member" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
