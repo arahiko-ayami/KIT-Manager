@@ -196,6 +196,8 @@
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(353, 40);
             this.dataGridView.MultiSelect = false;
@@ -208,6 +210,7 @@
             this.dataGridView.Size = new System.Drawing.Size(637, 496);
             this.dataGridView.TabIndex = 48;
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
+            this.dataGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             // 
             // dateTimePicker
             // 
@@ -408,9 +411,11 @@
             this.Controls.Add(this.textBoxClass);
             this.Controls.Add(this.textBoxPhoneNum);
             this.Controls.Add(this.labelClass);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MemberManageForm";
             this.Text = "MemberManageForm";
+            this.Shown += new System.EventHandler(this.MemberManageForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.toolStripMenuQLTV.ResumeLayout(false);
             this.toolStripMenuQLTV.PerformLayout();

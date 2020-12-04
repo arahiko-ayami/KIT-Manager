@@ -30,10 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectManageForm));
-            this.label1 = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
-            this.textBoxSearchByPID = new System.Windows.Forms.TextBox();
             this.toolStripMenuQLNNC = new System.Windows.Forms.ToolStrip();
             this.richTextBoxNote = new System.Windows.Forms.RichTextBox();
             this.labelPDescribe = new System.Windows.Forms.Label();
@@ -58,20 +56,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.memberBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(25, 106);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 17);
-            this.label1.TabIndex = 78;
-            this.label1.Text = "Mã Nhóm:";
-            // 
             // dataGridView
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(365, 44);
             this.dataGridView.MultiSelect = false;
@@ -79,10 +69,10 @@
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowHeadersWidth = 30;
-            this.dataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(637, 496);
             this.dataGridView.TabIndex = 76;
+            this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             // 
             // toolStripButtonRefresh
             // 
@@ -93,14 +83,6 @@
             this.toolStripButtonRefresh.Size = new System.Drawing.Size(50, 22);
             this.toolStripButtonRefresh.Text = "Refresh";
             this.toolStripButtonRefresh.TextChanged += new System.EventHandler(this.toolStripButtonRefresh_Click);
-            // 
-            // textBoxSearchByPID
-            // 
-            this.textBoxSearchByPID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBoxSearchByPID.Location = new System.Drawing.Point(165, 103);
-            this.textBoxSearchByPID.Name = "textBoxSearchByPID";
-            this.textBoxSearchByPID.Size = new System.Drawing.Size(153, 23);
-            this.textBoxSearchByPID.TabIndex = 77;
             // 
             // toolStripMenuQLNNC
             // 
@@ -116,7 +98,7 @@
             // richTextBoxNote
             // 
             this.richTextBoxNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBoxNote.Location = new System.Drawing.Point(165, 383);
+            this.richTextBoxNote.Location = new System.Drawing.Point(169, 383);
             this.richTextBoxNote.Name = "richTextBoxNote";
             this.richTextBoxNote.Size = new System.Drawing.Size(153, 123);
             this.richTextBoxNote.TabIndex = 67;
@@ -126,7 +108,7 @@
             // 
             this.labelPDescribe.AutoSize = true;
             this.labelPDescribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.labelPDescribe.Location = new System.Drawing.Point(24, 440);
+            this.labelPDescribe.Location = new System.Drawing.Point(28, 440);
             this.labelPDescribe.Name = "labelPDescribe";
             this.labelPDescribe.Size = new System.Drawing.Size(52, 17);
             this.labelPDescribe.TabIndex = 74;
@@ -135,7 +117,7 @@
             // textBoxSearchByPName
             // 
             this.textBoxSearchByPName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBoxSearchByPName.Location = new System.Drawing.Point(165, 74);
+            this.textBoxSearchByPName.Location = new System.Drawing.Point(169, 74);
             this.textBoxSearchByPName.Name = "textBoxSearchByPName";
             this.textBoxSearchByPName.Size = new System.Drawing.Size(153, 23);
             this.textBoxSearchByPName.TabIndex = 58;
@@ -144,7 +126,7 @@
             // 
             this.labelSearchProjectName.AutoSize = true;
             this.labelSearchProjectName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.labelSearchProjectName.Location = new System.Drawing.Point(24, 76);
+            this.labelSearchProjectName.Location = new System.Drawing.Point(28, 76);
             this.labelSearchProjectName.Name = "labelSearchProjectName";
             this.labelSearchProjectName.Size = new System.Drawing.Size(78, 17);
             this.labelSearchProjectName.TabIndex = 73;
@@ -155,7 +137,7 @@
             this.labelSearch.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.labelSearch.Image = ((System.Drawing.Image)(resources.GetObject("labelSearch.Image")));
-            this.labelSearch.Location = new System.Drawing.Point(8, 44);
+            this.labelSearch.Location = new System.Drawing.Point(12, 44);
             this.labelSearch.Name = "labelSearch";
             this.labelSearch.Size = new System.Drawing.Size(265, 26);
             this.labelSearch.TabIndex = 72;
@@ -166,7 +148,7 @@
             this.labelInfo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelInfo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.labelInfo.Image = ((System.Drawing.Image)(resources.GetObject("labelInfo.Image")));
-            this.labelInfo.Location = new System.Drawing.Point(8, 236);
+            this.labelInfo.Location = new System.Drawing.Point(12, 236);
             this.labelInfo.Name = "labelInfo";
             this.labelInfo.Size = new System.Drawing.Size(265, 26);
             this.labelInfo.TabIndex = 71;
@@ -176,31 +158,33 @@
             // 
             this.buttonModify.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.buttonModify.Image = ((System.Drawing.Image)(resources.GetObject("buttonModify.Image")));
-            this.buttonModify.Location = new System.Drawing.Point(235, 512);
+            this.buttonModify.Location = new System.Drawing.Point(239, 512);
             this.buttonModify.Name = "buttonModify";
             this.buttonModify.Size = new System.Drawing.Size(83, 28);
             this.buttonModify.TabIndex = 70;
             this.buttonModify.Text = "Sửa";
             this.buttonModify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonModify.UseVisualStyleBackColor = true;
+            this.buttonModify.Click += new System.EventHandler(this.buttonModify_Click);
             // 
             // buttonDelete
             // 
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.buttonDelete.Image = ((System.Drawing.Image)(resources.GetObject("buttonDelete.Image")));
-            this.buttonDelete.Location = new System.Drawing.Point(135, 512);
+            this.buttonDelete.Location = new System.Drawing.Point(139, 512);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(83, 28);
             this.buttonDelete.TabIndex = 69;
             this.buttonDelete.Text = "Xoá";
             this.buttonDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // labelProjectID
             // 
             this.labelProjectID.AutoSize = true;
             this.labelProjectID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.labelProjectID.Location = new System.Drawing.Point(25, 270);
+            this.labelProjectID.Location = new System.Drawing.Point(29, 270);
             this.labelProjectID.Name = "labelProjectID";
             this.labelProjectID.Size = new System.Drawing.Size(52, 17);
             this.labelProjectID.TabIndex = 59;
@@ -210,7 +194,7 @@
             // 
             this.buttonSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.buttonSubmit.Image = ((System.Drawing.Image)(resources.GetObject("buttonSubmit.Image")));
-            this.buttonSubmit.Location = new System.Drawing.Point(31, 512);
+            this.buttonSubmit.Location = new System.Drawing.Point(35, 512);
             this.buttonSubmit.Name = "buttonSubmit";
             this.buttonSubmit.Size = new System.Drawing.Size(83, 28);
             this.buttonSubmit.TabIndex = 62;
@@ -222,7 +206,7 @@
             // textBoxPName
             // 
             this.textBoxPName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBoxPName.Location = new System.Drawing.Point(165, 296);
+            this.textBoxPName.Location = new System.Drawing.Point(169, 296);
             this.textBoxPName.Name = "textBoxPName";
             this.textBoxPName.Size = new System.Drawing.Size(153, 23);
             this.textBoxPName.TabIndex = 61;
@@ -231,7 +215,7 @@
             // 
             this.labelPLeaderName.AutoSize = true;
             this.labelPLeaderName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.labelPLeaderName.Location = new System.Drawing.Point(24, 354);
+            this.labelPLeaderName.Location = new System.Drawing.Point(28, 354);
             this.labelPLeaderName.Name = "labelPLeaderName";
             this.labelPLeaderName.Size = new System.Drawing.Size(128, 17);
             this.labelPLeaderName.TabIndex = 68;
@@ -240,7 +224,7 @@
             // textBoxProjectLeaderID
             // 
             this.textBoxProjectLeaderID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBoxProjectLeaderID.Location = new System.Drawing.Point(165, 324);
+            this.textBoxProjectLeaderID.Location = new System.Drawing.Point(169, 324);
             this.textBoxProjectLeaderID.Name = "textBoxProjectLeaderID";
             this.textBoxProjectLeaderID.Size = new System.Drawing.Size(153, 23);
             this.textBoxProjectLeaderID.TabIndex = 63;
@@ -249,7 +233,7 @@
             // 
             this.labelProjectName.AutoSize = true;
             this.labelProjectName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.labelProjectName.Location = new System.Drawing.Point(24, 299);
+            this.labelProjectName.Location = new System.Drawing.Point(28, 299);
             this.labelProjectName.Name = "labelProjectName";
             this.labelProjectName.Size = new System.Drawing.Size(78, 17);
             this.labelProjectName.TabIndex = 64;
@@ -258,7 +242,7 @@
             // textBoxProjectID
             // 
             this.textBoxProjectID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBoxProjectID.Location = new System.Drawing.Point(165, 267);
+            this.textBoxProjectID.Location = new System.Drawing.Point(169, 267);
             this.textBoxProjectID.Name = "textBoxProjectID";
             this.textBoxProjectID.ReadOnly = true;
             this.textBoxProjectID.Size = new System.Drawing.Size(153, 23);
@@ -267,7 +251,7 @@
             // textBoxPLeaderName
             // 
             this.textBoxPLeaderName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBoxPLeaderName.Location = new System.Drawing.Point(165, 354);
+            this.textBoxPLeaderName.Location = new System.Drawing.Point(169, 354);
             this.textBoxPLeaderName.Name = "textBoxPLeaderName";
             this.textBoxPLeaderName.Size = new System.Drawing.Size(153, 23);
             this.textBoxPLeaderName.TabIndex = 65;
@@ -276,7 +260,7 @@
             // 
             this.labelProjectLeaderID.AutoSize = true;
             this.labelProjectLeaderID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.labelProjectLeaderID.Location = new System.Drawing.Point(24, 327);
+            this.labelProjectLeaderID.Location = new System.Drawing.Point(28, 327);
             this.labelProjectLeaderID.Name = "labelProjectLeaderID";
             this.labelProjectLeaderID.Size = new System.Drawing.Size(148, 17);
             this.labelProjectLeaderID.TabIndex = 66;
@@ -288,9 +272,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1025, 563);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView);
-            this.Controls.Add(this.textBoxSearchByPID);
             this.Controls.Add(this.toolStripMenuQLNNC);
             this.Controls.Add(this.richTextBoxNote);
             this.Controls.Add(this.labelPDescribe);
@@ -309,6 +291,7 @@
             this.Controls.Add(this.textBoxProjectID);
             this.Controls.Add(this.textBoxPLeaderName);
             this.Controls.Add(this.labelProjectLeaderID);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ProjectManageForm";
             this.Text = "ProjectManageForm";
@@ -322,12 +305,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.BindingSource memberBindingSource;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
-        private System.Windows.Forms.TextBox textBoxSearchByPID;
         private System.Windows.Forms.ToolStrip toolStripMenuQLNNC;
         private System.Windows.Forms.RichTextBox richTextBoxNote;
         private System.Windows.Forms.Label labelPDescribe;

@@ -17,6 +17,7 @@ namespace KIT_Manager.UI
 {
     public partial class MemberManageForm : Form
     {
+        public string windowName = Program.applicationName + " - Quản Lí Thành Viên";
         MemberDataContext db = new MemberDataContext();      //Establish the connection
         private String oldID;
         private String oldName;
@@ -24,8 +25,9 @@ namespace KIT_Manager.UI
         public MemberManageForm()
         {
             InitializeComponent();
-            LoadData();
+            this.Text = windowName;
             comboBoxSearchClass.Enabled = false;
+            LoadData();
         }
 
         //My custom methods
@@ -41,6 +43,7 @@ namespace KIT_Manager.UI
                 dataGridView.DataSource = result;
                 dataGridView.Refresh();
                 dataGridView.ClearSelection();
+                dataGridView.Columns[5].DefaultCellStyle.Format = "dd/MM/yyyy";
 
                 //Load ComboBox
                 LoadComboBox();
@@ -63,9 +66,16 @@ namespace KIT_Manager.UI
             {
                 var result =
                     from s in db.Members
-                    select s.Class;
+                    group s by s.Class;
 
-                comboBoxSearchClass.DataSource = result.ToArray();
+                List<string> cl = new List<string>();
+
+                foreach (var data in result)
+                {
+                    cl.Add(data.Key.ToString());
+                }
+
+                comboBoxSearchClass.DataSource = cl;
             }
             catch (Exception e)
             {
@@ -161,6 +171,55 @@ namespace KIT_Manager.UI
             db.SubmitChanges();
         }
 
+        private void Modify(string newInfo)
+        {
+            try
+            {
+                    String gender = radioButtonMale.Checked ? "Nam" : "Nữ";
+
+                    var result =
+                        (from s in db.Members
+                            where SqlMethods.Like(s.StudentID, oldID)
+                            select s).SingleOrDefault();
+
+                    if (!result.StudentID.Equals(textBoxStudentID.Text))
+                    {
+                        Delete(result.StudentID);
+                        AddData();
+                    }
+
+                    else
+                    {
+                        //if (!result.Name.Equals(textBoxName.Text))
+                            result.Name = textBoxName.Text;
+
+                        //if (!result.Class.Equals(textBoxClass.Text))
+                            result.Class = textBoxClass.Text;
+
+                        //if (!result.Birthday.Equals(DateTime.Parse(dateTimePicker.Value.ToString())))
+                            result.Birthday = DateTime.Parse(dateTimePicker.Value.ToString());
+
+                        //if (!result.PhoneNumber.Equals(textBoxPhoneNum.Text))
+                            result.PhoneNumber = textBoxPhoneNum.Text;
+
+                        //if (!result.Note.Equals(richTextBoxNote.Text))
+                            result.Note = richTextBoxNote.Text;
+
+                        //if (!result.Gender.Equals(gender))
+                            result.Gender = gender;
+                    }
+
+                    db.SubmitChanges();
+                    //MessageBox.Show("Sửa thành viên thành công!", Program.applicationName);
+                    dataGridView.Refresh();
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
         //Event
         private void buttonSubmit_Click(object sender, EventArgs e)
         {
@@ -176,19 +235,39 @@ namespace KIT_Manager.UI
 
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int rowNo = e.RowIndex;
-            if (rowNo > -1)
+            try
             {
-                oldID = textBoxStudentID.Text = dataGridView.Rows[rowNo].Cells[0].Value.ToString();
-                oldName = textBoxName.Text = dataGridView.Rows[rowNo].Cells[1].Value.ToString();
-                textBoxPhoneNum.Text = dataGridView.Rows[rowNo].Cells[2].Value.ToString();
-                textBoxClass.Text = dataGridView.Rows[rowNo].Cells[3].Value.ToString();
-                if (dataGridView.Rows[rowNo].Cells[4].Value != null)
-                    getGender(dataGridView.Rows[rowNo].Cells[4].Value.ToString());
-                else
-                    radioButtonMale.Checked = radioButtonFemale.Checked = false;
-                dateTimePicker.Value = DateTime.Parse(dataGridView.Rows[rowNo].Cells[5].Value.ToString());
-                richTextBoxNote.Text = dataGridView.Rows[rowNo].Cells[6].Value.ToString();
+                int rowNo = e.RowIndex;
+                ClearBoxes();
+                if (rowNo > -1)
+                {
+                    if (dataGridView.Rows[rowNo].Cells[0].Value != null)
+                        oldID = textBoxStudentID.Text = dataGridView.Rows[rowNo].Cells[0].Value.ToString();
+
+                    if (dataGridView.Rows[rowNo].Cells[1].Value != null)
+                        oldName = textBoxName.Text = dataGridView.Rows[rowNo].Cells[1].Value.ToString();
+
+                    if (dataGridView.Rows[rowNo].Cells[2].Value != null)
+                        textBoxPhoneNum.Text = dataGridView.Rows[rowNo].Cells[2].Value.ToString();
+
+                    if (dataGridView.Rows[rowNo].Cells[3].Value != null)
+                        textBoxClass.Text = dataGridView.Rows[rowNo].Cells[3].Value.ToString();
+
+                    if (dataGridView.Rows[rowNo].Cells[4].Value != null)
+                        getGender(dataGridView.Rows[rowNo].Cells[4].Value.ToString());
+                    else
+                        radioButtonMale.Checked = radioButtonFemale.Checked = false;
+
+                    if (dataGridView.Rows[rowNo].Cells[5].Value != null)
+                        dateTimePicker.Value = DateTime.Parse(dataGridView.Rows[rowNo].Cells[5].Value.ToString());
+
+                    if (dataGridView.Rows[rowNo].Cells[6].Value != null)
+                        richTextBoxNote.Text = dataGridView.Rows[rowNo].Cells[6].Value.ToString();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
             }
         }
 
@@ -238,6 +317,7 @@ namespace KIT_Manager.UI
         {
             if (checkBoxFilterClass.Checked)
             {
+                dataGridView.ClearSelection();
                 QueryByClass(comboBoxSearchClass.SelectedItem.ToString());
             }
         }
@@ -258,68 +338,38 @@ namespace KIT_Manager.UI
 
         private void buttonModify_Click(object sender, EventArgs e)
         {
-            String newInfo = "Thông tin sẽ được sửa thành:"
-                             + "\nMã Sinh Viên: " + textBoxStudentID.Text
-                             + "\nHọ tên: " + textBoxName.Text
-                             + "\nGiới Tính: " + (radioButtonMale.Checked ? "Nam" : "Nữ")
-                             + "\nNgày Sinh: " + dateTimePicker.Value.ToString("dd/MM/yyyy")
-                             + "\nLớp: " + textBoxName.Text
-                             + "\nSố Điện Thoại:" + textBoxPhoneNum.Text
-                             + "\nGhi Chú: " + richTextBoxNote.Text;
-
-            DialogResult confirm = DialogResult.None;
-            if (!textBoxStudentID.Text.Equals(string.Empty))
-                confirm = MessageBox.Show("Bạn có muốn thay đổi " + oldName + " không?" + "\n" + newInfo, "Bạn có chắc chắn?",
-                    MessageBoxButtons.YesNo);
-
-            if (confirm == DialogResult.Yes)
+            try
             {
-                try
+                String newInfo = "Thông tin sẽ được sửa thành:"
+                                 + "\nMã Sinh Viên: " + textBoxStudentID.Text
+                                 + "\nHọ tên: " + textBoxName.Text
+                                 + "\nGiới Tính: " + (radioButtonMale.Checked ? "Nam" : "Nữ")
+                                 + "\nNgày Sinh: " + dateTimePicker.Value.ToString("dd/MM/yyyy")
+                                 + "\nLớp: " + textBoxName.Text
+                                 + "\nSố Điện Thoại:" + textBoxPhoneNum.Text
+                                 + "\nGhi Chú: " + richTextBoxNote.Text;
+
+                DialogResult confirm = DialogResult.None;
+                if (!textBoxStudentID.Text.Equals(string.Empty))
+                    confirm = MessageBox.Show("Bạn có muốn thay đổi " + oldName + " không?" + "\n" + newInfo,
+                        "Bạn có chắc chắn?",
+                        MessageBoxButtons.YesNo);
+
+                if (confirm == DialogResult.Yes)
                 {
-                    String gender = radioButtonMale.Checked ? "Nam" : "Nữ";
-
-                    var result =
-                        (from s in db.Members
-                         where SqlMethods.Like(s.StudentID, oldID)
-                         select s).SingleOrDefault();
-
-                    if (!result.StudentID.Equals(textBoxStudentID.Text))
-                    {
-                        Delete(result.StudentID);
-                        AddData();
-                    }
-
-                    else
-                    {
-                        if (!result.Name.Equals(textBoxName.Text))
-                            result.Name = textBoxName.Text;
-
-                        if (!result.Class.Equals(textBoxClass.Text))
-                            result.Class = textBoxClass.Text;
-
-                        if (!result.Birthday.Equals(DateTime.Parse(dateTimePicker.Value.ToString())))
-                            result.Birthday = DateTime.Parse(dateTimePicker.Value.ToString());
-
-                        if (!result.PhoneNumber.Equals(textBoxPhoneNum.Text))
-                            result.PhoneNumber = textBoxPhoneNum.Text;
-
-                        if (!result.Note.Equals(richTextBoxNote.Text))
-                            result.Note = richTextBoxNote.Text;
-
-                        if (!result.Gender.Equals(gender))
-                            result.Gender = gender;
-                    }
-
-                    db.SubmitChanges();
-                    MessageBox.Show("Sửa thành viên thành công!", Program.applicationName);
-                    LoadData();
-
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show(exception.Message);
+                    Modify(newInfo);
                 }
             }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void MemberManageForm_Shown(object sender, EventArgs e)
+        {
+            dataGridView.ClearSelection();
+            ClearBoxes();
         }
     }
 }

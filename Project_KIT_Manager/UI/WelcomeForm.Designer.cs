@@ -33,6 +33,8 @@
             this.toolStripDropDownBtnMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.quảnLíThànhViênToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLíNhómNghiênCứuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButtonAbout = new System.Windows.Forms.ToolStripButton();
+            this.labelWelcome = new System.Windows.Forms.Label();
             this.toolStripMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,7 +42,8 @@
             // 
             this.toolStripMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStripMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownBtnMenu});
+            this.toolStripDropDownBtnMenu,
+            this.toolStripButtonAbout});
             this.toolStripMenu.Location = new System.Drawing.Point(0, 0);
             this.toolStripMenu.Name = "toolStripMenu";
             this.toolStripMenu.Size = new System.Drawing.Size(337, 25);
@@ -73,13 +76,37 @@
             this.quảnLíNhómNghiênCứuToolStripMenuItem.Text = "Quản Lí Nhóm Nghiên Cứu";
             this.quảnLíNhómNghiênCứuToolStripMenuItem.Click += new System.EventHandler(this.quảnLíNhómNghiênCứuToolStripMenuItem_Click);
             // 
+            // toolStripButtonAbout
+            // 
+            this.toolStripButtonAbout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButtonAbout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonAbout.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAbout.Image")));
+            this.toolStripButtonAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAbout.Name = "toolStripButtonAbout";
+            this.toolStripButtonAbout.Size = new System.Drawing.Size(63, 22);
+            this.toolStripButtonAbout.Text = "About Us!";
+            this.toolStripButtonAbout.ToolTipText = "More information about KIT Manager devlopers!";
+            this.toolStripButtonAbout.Click += new System.EventHandler(this.toolStripButtonAbout_Click);
+            // 
+            // labelWelcome
+            // 
+            this.labelWelcome.AutoSize = true;
+            this.labelWelcome.Font = new System.Drawing.Font("Pacifico", 21.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWelcome.Location = new System.Drawing.Point(92, 136);
+            this.labelWelcome.Name = "labelWelcome";
+            this.labelWelcome.Size = new System.Drawing.Size(148, 56);
+            this.labelWelcome.TabIndex = 2;
+            this.labelWelcome.Text = "Welcome!";
+            // 
             // WelcomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(337, 324);
+            this.Controls.Add(this.labelWelcome);
             this.Controls.Add(this.toolStripMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "WelcomeForm";
             this.Text = "WelcomeForm";
@@ -96,5 +123,7 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownBtnMenu;
         private System.Windows.Forms.ToolStripMenuItem quảnLíThànhViênToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quảnLíNhómNghiênCứuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAbout;
+        private System.Windows.Forms.Label labelWelcome;
     }
 }

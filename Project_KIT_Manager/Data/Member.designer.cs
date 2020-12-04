@@ -133,6 +133,7 @@ namespace Project_KIT_Manager.Data
 			OnCreated();
 		}
 		
+		[DisplayName("Mã SV")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="VarChar(255) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string StudentID
 		{
@@ -153,6 +154,7 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
+		[DisplayName("Họ Tên")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
 		public string Name
 		{
@@ -173,6 +175,7 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
+		[DisplayName("SĐT")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(10)")]
 		public string PhoneNumber
 		{
@@ -193,6 +196,7 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
+		[DisplayName("Lớp")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Class", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
 		public string Class
 		{
@@ -213,6 +217,7 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
+		[DisplayName("Giới Tính")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="NVarChar(5)")]
 		public string Gender
 		{
@@ -233,6 +238,7 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
+		[DisplayName("Ngày Sinh")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Birthday", DbType="Date")]
 		public System.Nullable<System.DateTime> Birthday
 		{
@@ -253,6 +259,7 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
+		[DisplayName("Ghi Chú")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="NVarChar(1000)")]
 		public string Note
 		{
@@ -379,6 +386,7 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
+		[DisplayName("Tên Nhóm")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectName", DbType="NVarChar(255)")]
 		public string ProjectName
 		{
@@ -399,6 +407,7 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
+		[DisplayName("Mô Tả Nhóm")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectDescribe", DbType="NVarChar(1000)")]
 		public string ProjectDescribe
 		{
@@ -419,6 +428,7 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
+		[DisplayName("Mã SV Nhóm Trưởng")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectLeaderID", DbType="VarChar(255)")]
 		public string ProjectLeaderID
 		{
@@ -443,6 +453,7 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
+		[DisplayName("Tên Nhóm Trưởng")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectLeaderName", DbType="NVarChar(255)")]
 		public string ProjectLeaderName
 		{
@@ -462,7 +473,7 @@ namespace Project_KIT_Manager.Data
 				}
 			}
 		}
-		
+        
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Member_Project", Storage="_Member", ThisKey="ProjectLeaderID", OtherKey="StudentID", IsForeignKey=true)]
 		public Member Member
 		{
