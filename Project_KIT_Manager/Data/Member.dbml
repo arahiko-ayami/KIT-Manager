@@ -4,11 +4,11 @@
     <Type Name="Member">
       <Column Name="StudentID" Type="System.String" DbType="VarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Class" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Class" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="Gender" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
       <Column Name="Birthday" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Note" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
       <Association Name="Member_Project" Member="Projects" ThisKey="StudentID" OtherKey="ProjectLeaderID" Type="Project" />
     </Type>
   </Table>

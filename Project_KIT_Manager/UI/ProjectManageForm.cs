@@ -1,30 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Linq.SqlClient;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Project_KIT_Manager;
 using Project_KIT_Manager.Data;
 
-namespace KIT_Manager.UI
+namespace Project_KIT_Manager.UI
 {
     public partial class ProjectManageForm : Form
     {
-        public string windowName = Program.applicationName + " - Quản Lí Nhóm Nghiên Cứu";
-        MemberDataContext db = new MemberDataContext();
-        private int oldID;
-        private String oldName;
+        public string WindowName = Program.ApplicationName + " - Quản Lí Nhóm Nghiên Cứu";
+        MemberDataContext _db = new MemberDataContext();
+        private int _oldId;
+        private String _oldName;
         private string _nameNotFound = "ID hoặc Tên sinh viên không đúng! Vui lòng kiểm tra lại";
 
         public ProjectManageForm()
         {
             InitializeComponent();
-            this.Text = windowName;
+            this.Text = WindowName;
             LoadData();
         }
 
@@ -35,7 +27,7 @@ namespace KIT_Manager.UI
             {
                 //Load DataGridView
                 var result =
-                    from s in db.Projects
+                    from s in _db.Projects
                     select new
                     {
                         s.ProjectID,
@@ -53,6 +45,14 @@ namespace KIT_Manager.UI
                 dataGridView.Columns[2].HeaderText = "Mã SV Nhóm Trưởng";
                 dataGridView.Columns[3].HeaderText = "Nhóm Trưởng";
                 dataGridView.Columns[4].HeaderText = "Mô Tả";
+                
+                    //Resize columns
+                for (int i = 1; i < 4; i++)
+                {
+                    dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                }
+
+                dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
                 //Clear Textboxes
                 ClearBoxes();
@@ -76,7 +76,7 @@ namespace KIT_Manager.UI
         private void AddData()
         {
             var result =
-                (from s in db.Members
+                (from s in _db.Members
                     where s.StudentID == textBoxProjectLeaderID.Text
                     select s).Single();
 
@@ -93,8 +93,8 @@ namespace KIT_Manager.UI
                         ProjectName = textBoxPName.Text
                     };
 
-                    db.Projects.InsertOnSubmit(prj);
-                    db.SubmitChanges();
+                    _db.Projects.InsertOnSubmit(prj);
+                    _db.SubmitChanges();
                     LoadData();
                 }
                 catch (Exception exception)
@@ -104,23 +104,23 @@ namespace KIT_Manager.UI
             }
         }
 
-        private void Delete(int ProjectID)
+        private void Delete(int projectId)
         {
             try
             {
                 var result =
-                    from s in db.Projects
-                    where s.ProjectID == ProjectID
+                    from s in _db.Projects
+                    where s.ProjectID == projectId
                     select s;
 
                 var deleteItems = result.ToList();
 
                 foreach (var deleteItem in deleteItems)
                 {
-                    db.Projects.DeleteOnSubmit(deleteItem);
+                    _db.Projects.DeleteOnSubmit(deleteItem);
                 }
 
-                db.SubmitChanges();
+                _db.SubmitChanges();
             }
             catch (Exception e)
             {
@@ -133,8 +133,8 @@ namespace KIT_Manager.UI
             try
             {
                 var result =
-                    (from s in db.Projects
-                        where s.ProjectID == oldID
+                    (from s in _db.Projects
+                        where s.ProjectID == _oldId
                         select s).SingleOrDefault();
 
                 if (result.ProjectID != Convert.ToInt32(textBoxProjectID.Text))
@@ -161,7 +161,7 @@ namespace KIT_Manager.UI
                     {
                         Delete(result.ProjectID);
                         var member =
-                            (from s in db.Members
+                            (from s in _db.Members
                                 where s.StudentID == textBoxProjectLeaderID.Text
                                 select s).Single();
 
@@ -179,8 +179,8 @@ namespace KIT_Manager.UI
                                     ProjectName = textBoxPName.Text
                                 };
 
-                                db.Projects.InsertOnSubmit(prj);
-                                db.SubmitChanges();
+                                _db.Projects.InsertOnSubmit(prj);
+                                _db.SubmitChanges();
                                 LoadData();
                             }
                             catch (Exception exception)
@@ -191,7 +191,7 @@ namespace KIT_Manager.UI
                     }
                 }
 
-                db.SubmitChanges();
+                _db.SubmitChanges();
                 dataGridView.Refresh();
 
             }
@@ -213,11 +213,11 @@ namespace KIT_Manager.UI
             if (rowNo > -1)
             {
                 textBoxProjectID.Text = dataGridView.Rows[rowNo].Cells[0].Value.ToString();
-                oldName = textBoxPName.Text = dataGridView.Rows[rowNo].Cells[1].Value.ToString();
+                _oldName = textBoxPName.Text = dataGridView.Rows[rowNo].Cells[1].Value.ToString();
                 textBoxProjectLeaderID.Text = dataGridView.Rows[rowNo].Cells[2].Value.ToString();
                 textBoxPLeaderName.Text = dataGridView.Rows[rowNo].Cells[3].Value.ToString();
                 richTextBoxNote.Text = dataGridView.Rows[rowNo].Cells[4].Value.ToString();
-                oldID = Convert.ToInt32(textBoxProjectID.Text);
+                _oldId = Convert.ToInt32(textBoxProjectID.Text);
             }
         }
 
@@ -227,9 +227,9 @@ namespace KIT_Manager.UI
             {
                 AddData();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(_nameNotFound, Program.applicationName);
+                MessageBox.Show(_nameNotFound, Program.ApplicationName);
             }
         }
 
@@ -250,7 +250,7 @@ namespace KIT_Manager.UI
                         id = Convert.ToInt32(row.Cells[0].Value);
                     }
                     Delete(id);
-                    MessageBox.Show("Xoá thành công!", Program.applicationName);
+                    MessageBox.Show("Xoá thành công!", Program.ApplicationName);
                     LoadData();
                 }
                 catch (Exception exception)
@@ -273,7 +273,7 @@ namespace KIT_Manager.UI
                 DialogResult confirm = DialogResult.None;
                 if (!(textBoxPName.Text.Equals(string.Empty) && textBoxPLeaderName.Text.Equals(string.Empty) 
                                                            && textBoxProjectLeaderID.Text.Equals(string.Empty)))
-                    confirm = MessageBox.Show("Bạn có muốn thay đổi " + oldName + " không?" + "\n" + newInfo,
+                    confirm = MessageBox.Show("Bạn có muốn thay đổi " + _oldName + " không?" + "\n" + newInfo,
                         "Bạn có chắc chắn?",
                         MessageBoxButtons.YesNo);
 

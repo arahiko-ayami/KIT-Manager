@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using KIT_Manager;
+using Project_KIT_Manager.UI;
 
 namespace Project_KIT_Manager
 {
     static class Program
     {
-        public static String applicationName = "KIT Manager";
+        public static String ApplicationName = "KIT Manager";
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

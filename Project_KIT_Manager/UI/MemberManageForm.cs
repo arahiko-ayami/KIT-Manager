@@ -1,31 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Linq;
 using System.Data.Linq.SqlClient;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Project_KIT_Manager;
 using Project_KIT_Manager.Data;
 
-namespace KIT_Manager.UI
+namespace Project_KIT_Manager.UI
 {
     public partial class MemberManageForm : Form
     {
-        public string windowName = Program.applicationName + " - Quản Lí Thành Viên";
-        MemberDataContext db = new MemberDataContext();      //Establish the connection
-        private String oldID;
-        private String oldName;
+        public string WindowName = Program.ApplicationName + " - Quản Lí Thành Viên";
+        readonly MemberDataContext _db = new MemberDataContext();      //Establish the connection
+        private String _oldId;
+        private String _oldName;
 
         public MemberManageForm()
         {
             InitializeComponent();
-            this.Text = windowName;
+            this.Text = WindowName;
             comboBoxSearchClass.Enabled = false;
             LoadData();
         }
@@ -37,13 +29,21 @@ namespace KIT_Manager.UI
             {
                 //Load DataGridView
                 var result =
-                    from s in db.Members
+                    from s in _db.Members
                     select s;
 
                 dataGridView.DataSource = result;
                 dataGridView.Refresh();
                 dataGridView.ClearSelection();
                 dataGridView.Columns[5].DefaultCellStyle.Format = "dd/MM/yyyy";
+                
+                    //Resize columns
+                    for (int i = 0; i < 6; i++)
+                    {
+                        dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                    }
+
+                    dataGridView.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
                 //Load ComboBox
                 LoadComboBox();
@@ -65,7 +65,7 @@ namespace KIT_Manager.UI
             try
             {
                 var result =
-                    from s in db.Members
+                    from s in _db.Members
                     group s by s.Class;
 
                 List<string> cl = new List<string>();
@@ -89,12 +89,12 @@ namespace KIT_Manager.UI
             textBoxName.Text = String.Empty;
             textBoxClass.Text = String.Empty;
             textBoxPhoneNum.Text = String.Empty;
-            richTextBoxNote.Text = String.Empty;
+            richTextBoxEmail.Text = String.Empty;
             radioButtonFemale.Checked = radioButtonMale.Checked = false;
             dateTimePicker.Value = DateTime.Today;
         }
 
-        private String setGender()
+        private String SetGender()
         {
             if (radioButtonMale.Checked)
                 return "Nam";
@@ -104,7 +104,7 @@ namespace KIT_Manager.UI
                 return null;
         }
 
-        private void getGender(string gender)
+        private void GetGender(string gender)
         {
             if (gender != string.Empty)
             {
@@ -115,10 +115,10 @@ namespace KIT_Manager.UI
             }
         }
 
-        private void QueryByClass(string data)
+        private void QueryByClass()
         {
             var result =
-                from s in db.Members
+                from s in _db.Members
                 where SqlMethods.Like(s.Class, comboBoxSearchClass.SelectedItem.ToString())
                 select s;
 
@@ -138,8 +138,8 @@ namespace KIT_Manager.UI
                         Name = textBoxName.Text,
                         Birthday = dateTimePicker.Value,
                         Class = textBoxClass.Text,
-                        Gender = setGender(),
-                        Note = richTextBoxNote.Text,
+                        Gender = SetGender(),
+                        Email = richTextBoxEmail.Text,
                         PhoneNumber = textBoxPhoneNum.Text
                     };
 
@@ -154,32 +154,32 @@ namespace KIT_Manager.UI
             }
         }
 
-        private void Delete(String StudentID)
+        private void Delete(String studentId)
         {
             var result =
-                from s in db.Members
-                where s.StudentID == StudentID
+                from s in _db.Members
+                where s.StudentID == studentId
                 select s;
 
             var deleteItems = result.ToList();
 
             foreach (var deleteItem in deleteItems)
             {
-                db.Members.DeleteOnSubmit(deleteItem);
+                _db.Members.DeleteOnSubmit(deleteItem);
             }
 
-            db.SubmitChanges();
+            _db.SubmitChanges();
         }
 
-        private void Modify(string newInfo)
+        private void Modify()
         {
             try
             {
                     String gender = radioButtonMale.Checked ? "Nam" : "Nữ";
 
                     var result =
-                        (from s in db.Members
-                            where SqlMethods.Like(s.StudentID, oldID)
+                        (from s in _db.Members
+                            where SqlMethods.Like(s.StudentID, _oldId)
                             select s).SingleOrDefault();
 
                     if (!result.StudentID.Equals(textBoxStudentID.Text))
@@ -203,13 +203,13 @@ namespace KIT_Manager.UI
                             result.PhoneNumber = textBoxPhoneNum.Text;
 
                         //if (!result.Note.Equals(richTextBoxNote.Text))
-                            result.Note = richTextBoxNote.Text;
+                            result.Email = richTextBoxEmail.Text;
 
                         //if (!result.Gender.Equals(gender))
                             result.Gender = gender;
                     }
 
-                    db.SubmitChanges();
+                    _db.SubmitChanges();
                     //MessageBox.Show("Sửa thành viên thành công!", Program.applicationName);
                     dataGridView.Refresh();
 
@@ -242,10 +242,10 @@ namespace KIT_Manager.UI
                 if (rowNo > -1)
                 {
                     if (dataGridView.Rows[rowNo].Cells[0].Value != null)
-                        oldID = textBoxStudentID.Text = dataGridView.Rows[rowNo].Cells[0].Value.ToString();
+                        _oldId = textBoxStudentID.Text = dataGridView.Rows[rowNo].Cells[0].Value.ToString();
 
                     if (dataGridView.Rows[rowNo].Cells[1].Value != null)
-                        oldName = textBoxName.Text = dataGridView.Rows[rowNo].Cells[1].Value.ToString();
+                        _oldName = textBoxName.Text = dataGridView.Rows[rowNo].Cells[1].Value.ToString();
 
                     if (dataGridView.Rows[rowNo].Cells[2].Value != null)
                         textBoxPhoneNum.Text = dataGridView.Rows[rowNo].Cells[2].Value.ToString();
@@ -254,7 +254,7 @@ namespace KIT_Manager.UI
                         textBoxClass.Text = dataGridView.Rows[rowNo].Cells[3].Value.ToString();
 
                     if (dataGridView.Rows[rowNo].Cells[4].Value != null)
-                        getGender(dataGridView.Rows[rowNo].Cells[4].Value.ToString());
+                        GetGender(dataGridView.Rows[rowNo].Cells[4].Value.ToString());
                     else
                         radioButtonMale.Checked = radioButtonFemale.Checked = false;
 
@@ -262,7 +262,7 @@ namespace KIT_Manager.UI
                         dateTimePicker.Value = DateTime.Parse(dataGridView.Rows[rowNo].Cells[5].Value.ToString());
 
                     if (dataGridView.Rows[rowNo].Cells[6].Value != null)
-                        richTextBoxNote.Text = dataGridView.Rows[rowNo].Cells[6].Value.ToString();
+                        richTextBoxEmail.Text = dataGridView.Rows[rowNo].Cells[6].Value.ToString();
                 }
             }
             catch (Exception exception)
@@ -288,7 +288,7 @@ namespace KIT_Manager.UI
                         id = row.Cells[0].Value.ToString();
                     }
                     Delete(id);
-                    MessageBox.Show("Xoá thành công!", Program.applicationName);
+                    MessageBox.Show("Xoá thành công!", Program.ApplicationName);
                     LoadData();
                 }
                 catch (Exception exception)
@@ -306,7 +306,7 @@ namespace KIT_Manager.UI
         private void textBoxSearchByName_TextChanged(object sender, EventArgs e)
         {
             var result =
-                from s in db.Members
+                from s in _db.Members
                 where SqlMethods.Like(s.Name, "%" + textBoxSearchByName.Text + "%")
                 select s;
 
@@ -318,7 +318,7 @@ namespace KIT_Manager.UI
             if (checkBoxFilterClass.Checked)
             {
                 dataGridView.ClearSelection();
-                QueryByClass(comboBoxSearchClass.SelectedItem.ToString());
+                QueryByClass();
             }
         }
 
@@ -327,7 +327,7 @@ namespace KIT_Manager.UI
             if (checkBoxFilterClass.Checked)
             {
                 comboBoxSearchClass.Enabled = true;
-                QueryByClass(comboBoxSearchClass.SelectedItem.ToString());
+                QueryByClass();
             }
             else
             {
@@ -347,17 +347,17 @@ namespace KIT_Manager.UI
                                  + "\nNgày Sinh: " + dateTimePicker.Value.ToString("dd/MM/yyyy")
                                  + "\nLớp: " + textBoxName.Text
                                  + "\nSố Điện Thoại:" + textBoxPhoneNum.Text
-                                 + "\nGhi Chú: " + richTextBoxNote.Text;
+                                 + "\nGhi Chú: " + richTextBoxEmail.Text;
 
                 DialogResult confirm = DialogResult.None;
                 if (!textBoxStudentID.Text.Equals(string.Empty))
-                    confirm = MessageBox.Show("Bạn có muốn thay đổi " + oldName + " không?" + "\n" + newInfo,
+                    confirm = MessageBox.Show("Bạn có muốn thay đổi " + _oldName + " không?" + "\n" + newInfo,
                         "Bạn có chắc chắn?",
                         MessageBoxButtons.YesNo);
 
                 if (confirm == DialogResult.Yes)
                 {
-                    Modify(newInfo);
+                    Modify();
                 }
             }
             catch (Exception exception)

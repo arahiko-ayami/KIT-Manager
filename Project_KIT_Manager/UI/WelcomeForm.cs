@@ -1,25 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using KIT_Manager.UI;
-using Project_KIT_Manager;
-using Project_KIT_Manager.UI;
 
-namespace KIT_Manager
+namespace Project_KIT_Manager.UI
 {
     public partial class WelcomeForm : Form
     {
-        public string windowName = Program.applicationName;
+        public string WindowName = Program.ApplicationName;
         public WelcomeForm()
         {
             InitializeComponent();
-            this.Text = windowName;
+            this.Text = WindowName;
         }
 
         private void quảnLíThànhViênToolStripMenuItem_Click(object sender, EventArgs e)

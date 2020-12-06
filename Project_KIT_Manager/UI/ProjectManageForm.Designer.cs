@@ -1,4 +1,4 @@
-﻿namespace KIT_Manager.UI
+﻿namespace Project_KIT_Manager.UI
 {
     partial class ProjectManageForm
     {
@@ -51,9 +51,9 @@
             this.textBoxPLeaderName = new System.Windows.Forms.TextBox();
             this.labelProjectLeaderID = new System.Windows.Forms.Label();
             this.memberBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.dataGridView)).BeginInit();
             this.toolStripMenuQLNNC.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.memberBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.memberBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -77,7 +77,7 @@
             // toolStripButtonRefresh
             // 
             this.toolStripButtonRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRefresh.Image")));
+            this.toolStripButtonRefresh.Image = ((System.Drawing.Image) (resources.GetObject("toolStripButtonRefresh.Image")));
             this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
             this.toolStripButtonRefresh.Size = new System.Drawing.Size(50, 22);
@@ -88,8 +88,7 @@
             // 
             this.toolStripMenuQLNNC.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.toolStripMenuQLNNC.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStripMenuQLNNC.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonRefresh});
+            this.toolStripMenuQLNNC.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.toolStripButtonRefresh});
             this.toolStripMenuQLNNC.Location = new System.Drawing.Point(0, 0);
             this.toolStripMenuQLNNC.Name = "toolStripMenuQLNNC";
             this.toolStripMenuQLNNC.Size = new System.Drawing.Size(1025, 25);
@@ -97,10 +96,10 @@
             // 
             // richTextBoxNote
             // 
-            this.richTextBoxNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.richTextBoxNote.Location = new System.Drawing.Point(169, 383);
             this.richTextBoxNote.Name = "richTextBoxNote";
-            this.richTextBoxNote.Size = new System.Drawing.Size(153, 123);
+            this.richTextBoxNote.Size = new System.Drawing.Size(172, 123);
             this.richTextBoxNote.TabIndex = 67;
             this.richTextBoxNote.Text = "";
             // 
@@ -119,7 +118,7 @@
             this.textBoxSearchByPName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.textBoxSearchByPName.Location = new System.Drawing.Point(169, 74);
             this.textBoxSearchByPName.Name = "textBoxSearchByPName";
-            this.textBoxSearchByPName.Size = new System.Drawing.Size(153, 23);
+            this.textBoxSearchByPName.Size = new System.Drawing.Size(172, 23);
             this.textBoxSearchByPName.TabIndex = 58;
             // 
             // labelSearchProjectName
@@ -134,9 +133,9 @@
             // 
             // labelSearch
             // 
-            this.labelSearch.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSearch.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.labelSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSearch.Image = ((System.Drawing.Image)(resources.GetObject("labelSearch.Image")));
+            this.labelSearch.Image = ((System.Drawing.Image) (resources.GetObject("labelSearch.Image")));
             this.labelSearch.Location = new System.Drawing.Point(12, 44);
             this.labelSearch.Name = "labelSearch";
             this.labelSearch.Size = new System.Drawing.Size(265, 26);
@@ -145,9 +144,9 @@
             // 
             // labelInfo
             // 
-            this.labelInfo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInfo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.labelInfo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelInfo.Image = ((System.Drawing.Image)(resources.GetObject("labelInfo.Image")));
+            this.labelInfo.Image = ((System.Drawing.Image) (resources.GetObject("labelInfo.Image")));
             this.labelInfo.Location = new System.Drawing.Point(12, 236);
             this.labelInfo.Name = "labelInfo";
             this.labelInfo.Size = new System.Drawing.Size(265, 26);
@@ -157,8 +156,8 @@
             // buttonModify
             // 
             this.buttonModify.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.buttonModify.Image = ((System.Drawing.Image)(resources.GetObject("buttonModify.Image")));
-            this.buttonModify.Location = new System.Drawing.Point(239, 512);
+            this.buttonModify.Image = ((System.Drawing.Image) (resources.GetObject("buttonModify.Image")));
+            this.buttonModify.Location = new System.Drawing.Point(258, 512);
             this.buttonModify.Name = "buttonModify";
             this.buttonModify.Size = new System.Drawing.Size(83, 28);
             this.buttonModify.TabIndex = 70;
@@ -170,8 +169,8 @@
             // buttonDelete
             // 
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.buttonDelete.Image = ((System.Drawing.Image)(resources.GetObject("buttonDelete.Image")));
-            this.buttonDelete.Location = new System.Drawing.Point(139, 512);
+            this.buttonDelete.Image = ((System.Drawing.Image) (resources.GetObject("buttonDelete.Image")));
+            this.buttonDelete.Location = new System.Drawing.Point(149, 512);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(83, 28);
             this.buttonDelete.TabIndex = 69;
@@ -193,7 +192,7 @@
             // buttonSubmit
             // 
             this.buttonSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.buttonSubmit.Image = ((System.Drawing.Image)(resources.GetObject("buttonSubmit.Image")));
+            this.buttonSubmit.Image = ((System.Drawing.Image) (resources.GetObject("buttonSubmit.Image")));
             this.buttonSubmit.Location = new System.Drawing.Point(35, 512);
             this.buttonSubmit.Name = "buttonSubmit";
             this.buttonSubmit.Size = new System.Drawing.Size(83, 28);
@@ -208,7 +207,7 @@
             this.textBoxPName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.textBoxPName.Location = new System.Drawing.Point(169, 296);
             this.textBoxPName.Name = "textBoxPName";
-            this.textBoxPName.Size = new System.Drawing.Size(153, 23);
+            this.textBoxPName.Size = new System.Drawing.Size(172, 23);
             this.textBoxPName.TabIndex = 61;
             // 
             // labelPLeaderName
@@ -226,7 +225,7 @@
             this.textBoxProjectLeaderID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.textBoxProjectLeaderID.Location = new System.Drawing.Point(169, 324);
             this.textBoxProjectLeaderID.Name = "textBoxProjectLeaderID";
-            this.textBoxProjectLeaderID.Size = new System.Drawing.Size(153, 23);
+            this.textBoxProjectLeaderID.Size = new System.Drawing.Size(172, 23);
             this.textBoxProjectLeaderID.TabIndex = 63;
             // 
             // labelProjectName
@@ -245,7 +244,7 @@
             this.textBoxProjectID.Location = new System.Drawing.Point(169, 267);
             this.textBoxProjectID.Name = "textBoxProjectID";
             this.textBoxProjectID.ReadOnly = true;
-            this.textBoxProjectID.Size = new System.Drawing.Size(153, 23);
+            this.textBoxProjectID.Size = new System.Drawing.Size(172, 23);
             this.textBoxProjectID.TabIndex = 60;
             // 
             // textBoxPLeaderName
@@ -253,7 +252,7 @@
             this.textBoxPLeaderName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.textBoxPLeaderName.Location = new System.Drawing.Point(169, 354);
             this.textBoxPLeaderName.Name = "textBoxPLeaderName";
-            this.textBoxPLeaderName.Size = new System.Drawing.Size(153, 23);
+            this.textBoxPLeaderName.Size = new System.Drawing.Size(172, 23);
             this.textBoxPLeaderName.TabIndex = 65;
             // 
             // labelProjectLeaderID
@@ -291,17 +290,16 @@
             this.Controls.Add(this.textBoxProjectID);
             this.Controls.Add(this.textBoxPLeaderName);
             this.Controls.Add(this.labelProjectLeaderID);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ProjectManageForm";
             this.Text = "ProjectManageForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.dataGridView)).EndInit();
             this.toolStripMenuQLNNC.ResumeLayout(false);
             this.toolStripMenuQLNNC.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.memberBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.memberBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

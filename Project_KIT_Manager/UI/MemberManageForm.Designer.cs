@@ -1,4 +1,4 @@
-﻿namespace KIT_Manager.UI
+﻿namespace Project_KIT_Manager.UI
 {
     partial class MemberManageForm
     {
@@ -32,8 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MemberManageForm));
             this.labelFilter = new System.Windows.Forms.Label();
             this.checkBoxFilterClass = new System.Windows.Forms.CheckBox();
-            this.richTextBoxNote = new System.Windows.Forms.RichTextBox();
-            this.labelNote = new System.Windows.Forms.Label();
+            this.richTextBoxEmail = new System.Windows.Forms.RichTextBox();
+            this.labelEmail = new System.Windows.Forms.Label();
             this.comboBoxSearchClass = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxSearchByName = new System.Windows.Forms.TextBox();
@@ -87,24 +87,24 @@
             this.checkBoxFilterClass.UseVisualStyleBackColor = true;
             this.checkBoxFilterClass.CheckedChanged += new System.EventHandler(this.checkBoxFilterClass_CheckedChanged);
             // 
-            // richTextBoxNote
+            // richTextBoxEmail
             // 
-            this.richTextBoxNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBoxNote.Location = new System.Drawing.Point(149, 433);
-            this.richTextBoxNote.Name = "richTextBoxNote";
-            this.richTextBoxNote.Size = new System.Drawing.Size(153, 60);
-            this.richTextBoxNote.TabIndex = 41;
-            this.richTextBoxNote.Text = "";
+            this.richTextBoxEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxEmail.Location = new System.Drawing.Point(149, 433);
+            this.richTextBoxEmail.Name = "richTextBoxEmail";
+            this.richTextBoxEmail.Size = new System.Drawing.Size(153, 60);
+            this.richTextBoxEmail.TabIndex = 41;
+            this.richTextBoxEmail.Text = "";
             // 
-            // labelNote
+            // labelEmail
             // 
-            this.labelNote.AutoSize = true;
-            this.labelNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.labelNote.Location = new System.Drawing.Point(40, 453);
-            this.labelNote.Name = "labelNote";
-            this.labelNote.Size = new System.Drawing.Size(63, 17);
-            this.labelNote.TabIndex = 53;
-            this.labelNote.Text = "Ghi Chú:";
+            this.labelEmail.AutoSize = true;
+            this.labelEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.labelEmail.Location = new System.Drawing.Point(40, 453);
+            this.labelEmail.Name = "labelEmail";
+            this.labelEmail.Size = new System.Drawing.Size(46, 17);
+            this.labelEmail.TabIndex = 53;
+            this.labelEmail.Text = "Email:";
             // 
             // comboBoxSearchClass
             // 
@@ -385,8 +385,8 @@
             this.ClientSize = new System.Drawing.Size(1002, 563);
             this.Controls.Add(this.labelFilter);
             this.Controls.Add(this.checkBoxFilterClass);
-            this.Controls.Add(this.richTextBoxNote);
-            this.Controls.Add(this.labelNote);
+            this.Controls.Add(this.richTextBoxEmail);
+            this.Controls.Add(this.labelEmail);
             this.Controls.Add(this.comboBoxSearchClass);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxSearchByName);
@@ -430,8 +430,8 @@
         private System.Windows.Forms.BindingSource memberBindingSource;
         private System.Windows.Forms.Label labelFilter;
         private System.Windows.Forms.CheckBox checkBoxFilterClass;
-        private System.Windows.Forms.RichTextBox richTextBoxNote;
-        private System.Windows.Forms.Label labelNote;
+        private System.Windows.Forms.RichTextBox richTextBoxEmail;
+        private System.Windows.Forms.Label labelEmail;
         private System.Windows.Forms.ComboBox comboBoxSearchClass;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxSearchByName;

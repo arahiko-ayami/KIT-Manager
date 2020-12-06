@@ -292,5 +292,6 @@
     <Content Include="bin\Debug\Materials\icon\modify.png" />
     <Content Include="bin\Debug\Materials\icon\search.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

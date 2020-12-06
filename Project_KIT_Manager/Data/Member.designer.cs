@@ -103,7 +103,7 @@ namespace Project_KIT_Manager.Data
 		
 		private System.Nullable<System.DateTime> _Birthday;
 		
-		private string _Note;
+		private string _Email;
 		
 		private EntitySet<Project> _Projects;
 		
@@ -123,8 +123,8 @@ namespace Project_KIT_Manager.Data
     partial void OnGenderChanged();
     partial void OnBirthdayChanging(System.Nullable<System.DateTime> value);
     partial void OnBirthdayChanged();
-    partial void OnNoteChanging(string value);
-    partial void OnNoteChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
     #endregion
 		
 		public Member()
@@ -176,7 +176,7 @@ namespace Project_KIT_Manager.Data
 		}
 		
 		[DisplayName("SĐT")]
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(20)")]
 		public string PhoneNumber
 		{
 			get
@@ -197,7 +197,7 @@ namespace Project_KIT_Manager.Data
 		}
 		
 		[DisplayName("Lớp")]
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Class", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Class", DbType="VarChar(255)")]
 		public string Class
 		{
 			get
@@ -259,23 +259,22 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
-		[DisplayName("Ghi Chú")]
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="NVarChar(1000)")]
-		public string Note
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(1000)")]
+		public string Email
 		{
 			get
 			{
-				return this._Note;
+				return this._Email;
 			}
 			set
 			{
-				if ((this._Note != value))
+				if ((this._Email != value))
 				{
-					this.OnNoteChanging(value);
+					this.OnEmailChanging(value);
 					this.SendPropertyChanging();
-					this._Note = value;
-					this.SendPropertyChanged("Note");
-					this.OnNoteChanged();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
 				}
 			}
 		}
@@ -366,6 +365,7 @@ namespace Project_KIT_Manager.Data
 			OnCreated();
 		}
 		
+		[DisplayName("Mã Nhóm")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ProjectID
 		{
@@ -407,7 +407,7 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
-		[DisplayName("Mô Tả Nhóm")]
+		[DisplayName("Mô Tả")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectDescribe", DbType="NVarChar(1000)")]
 		public string ProjectDescribe
 		{
@@ -453,7 +453,7 @@ namespace Project_KIT_Manager.Data
 			}
 		}
 		
-		[DisplayName("Tên Nhóm Trưởng")]
+		[DisplayName("Nhóm Trưởng")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectLeaderName", DbType="NVarChar(255)")]
 		public string ProjectLeaderName
 		{
@@ -473,7 +473,7 @@ namespace Project_KIT_Manager.Data
 				}
 			}
 		}
-        
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Member_Project", Storage="_Member", ThisKey="ProjectLeaderID", OtherKey="StudentID", IsForeignKey=true)]
 		public Member Member
 		{
