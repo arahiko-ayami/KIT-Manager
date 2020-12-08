@@ -35,13 +35,13 @@
             this.labelDev = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.buttonOK = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxKIT)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxMe)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.picBoxKIT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.picBoxMe)).BeginInit();
             this.SuspendLayout();
             // 
             // picBoxKIT
             // 
-            this.picBoxKIT.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picBoxKIT.BackgroundImage")));
+            this.picBoxKIT.BackgroundImage = ((System.Drawing.Image) (resources.GetObject("picBoxKIT.BackgroundImage")));
             this.picBoxKIT.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picBoxKIT.Location = new System.Drawing.Point(12, 42);
             this.picBoxKIT.Name = "picBoxKIT";
@@ -51,7 +51,7 @@
             // 
             // picBoxMe
             // 
-            this.picBoxMe.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picBoxMe.BackgroundImage")));
+            this.picBoxMe.BackgroundImage = ((System.Drawing.Image) (resources.GetObject("picBoxMe.BackgroundImage")));
             this.picBoxMe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picBoxMe.Location = new System.Drawing.Point(98, 42);
             this.picBoxMe.Name = "picBoxMe";
@@ -62,7 +62,7 @@
             // labelAppName
             // 
             this.labelAppName.AutoSize = true;
-            this.labelAppName.Font = new System.Drawing.Font("JetBrains Mono ExtraBold", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAppName.Font = new System.Drawing.Font("JetBrains Mono ExtraBold", 20.25F, ((System.Drawing.FontStyle) ((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.labelAppName.Location = new System.Drawing.Point(218, 55);
             this.labelAppName.Name = "labelAppName";
             this.labelAppName.Size = new System.Drawing.Size(191, 36);
@@ -82,7 +82,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("JetBrains Mono Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Font = new System.Drawing.Font("JetBrains Mono Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.linkLabel1.Location = new System.Drawing.Point(346, 91);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(81, 19);
@@ -115,12 +115,11 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutForm";
-            this.Text = "AboutForm";
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxKIT)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxMe)).EndInit();
+            this.Text = "About...";
+            ((System.ComponentModel.ISupportInitialize) (this.picBoxKIT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.picBoxMe)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

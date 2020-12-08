@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Linq.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 using Project_KIT_Manager.Data;
@@ -7,7 +8,7 @@ namespace Project_KIT_Manager.UI
 {
     public partial class ProjectManageForm : Form
     {
-        public string WindowName = Program.ApplicationName + " - Quản Lí Nhóm Nghiên Cứu";
+        private readonly string _windowName = Program.ApplicationName + " - Quản Lí Nhóm Nghiên Cứu";
         MemberDataContext _db = new MemberDataContext();
         private int _oldId;
         private String _oldName;
@@ -16,7 +17,7 @@ namespace Project_KIT_Manager.UI
         public ProjectManageForm()
         {
             InitializeComponent();
-            this.Text = WindowName;
+            this.Text = _windowName;
             LoadData();
         }
 
@@ -47,12 +48,12 @@ namespace Project_KIT_Manager.UI
                 dataGridView.Columns[4].HeaderText = "Mô Tả";
                 
                     //Resize columns
-                for (int i = 1; i < 4; i++)
-                {
-                    dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                }
+                    for (int i = 1; i < 4; i++)
+                    {
+                        dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                    }
 
-                dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
                 //Clear Textboxes
                 ClearBoxes();
@@ -135,7 +136,7 @@ namespace Project_KIT_Manager.UI
                 var result =
                     (from s in _db.Projects
                         where s.ProjectID == _oldId
-                        select s).SingleOrDefault();
+                        select s).Single();
 
                 if (result.ProjectID != Convert.ToInt32(textBoxProjectID.Text))
                 {
@@ -287,6 +288,52 @@ namespace Project_KIT_Manager.UI
                 MessageBox.Show(exception.Message);
             }
 
+        }
+        private void textBoxProjectLeaderID_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var result =
+                    (from s in _db.Members
+                        where s.StudentID.Equals(textBoxProjectLeaderID.Text)
+                        select s).Single();
+
+                textBoxPLeaderName.Text = result.Name;
+            }
+            catch (Exception)
+            {
+                if(!textBoxProjectLeaderID.Text.Equals(String.Empty))
+                    textBoxPLeaderName.Text = "Không tồn tại!";
+                else
+                    textBoxPLeaderName.Text = String.Empty;
+            }
+        }
+
+        private void ProjectManageForm_Load(object sender, EventArgs e)
+        {
+            /*var result =
+                from s in _db.Members
+                select s.Name;
+
+            AutoCompleteStringCollection qryResult = new AutoCompleteStringCollection();
+            foreach (var stu in result)
+            {
+                qryResult.Add(stu);
+            }
+
+            textBoxPLeaderName.AutoCompleteCustomSource = qryResult;*/
+            
+            var result =
+                from s in _db.Members
+                select s.StudentID;
+
+            AutoCompleteStringCollection qryResult = new AutoCompleteStringCollection();
+            foreach (var stu in result)
+            {
+                qryResult.Add(stu);
+            }
+
+            textBoxProjectLeaderID.AutoCompleteCustomSource = qryResult;
         }
     }
 }

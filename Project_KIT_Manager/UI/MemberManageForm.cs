@@ -9,7 +9,7 @@ namespace Project_KIT_Manager.UI
 {
     public partial class MemberManageForm : Form
     {
-        public string WindowName = Program.ApplicationName + " - Quản Lí Thành Viên";
+        private readonly string _windowName = Program.ApplicationName + " - Quản Lí Thành Viên";
         readonly MemberDataContext _db = new MemberDataContext();      //Establish the connection
         private String _oldId;
         private String _oldName;
@@ -17,7 +17,7 @@ namespace Project_KIT_Manager.UI
         public MemberManageForm()
         {
             InitializeComponent();
-            this.Text = WindowName;
+            this.Text = _windowName;
             comboBoxSearchClass.Enabled = false;
             LoadData();
         }
@@ -72,7 +72,7 @@ namespace Project_KIT_Manager.UI
 
                 foreach (var data in result)
                 {
-                    cl.Add(data.Key.ToString());
+                    cl.Add(data.Key);
                 }
 
                 comboBoxSearchClass.DataSource = cl;
@@ -101,7 +101,7 @@ namespace Project_KIT_Manager.UI
             else if (radioButtonFemale.Checked)
                 return "Nữ";
             else
-                return null;
+                return String.Empty;
         }
 
         private void GetGender(string gender)
@@ -175,12 +175,12 @@ namespace Project_KIT_Manager.UI
         {
             try
             {
-                    String gender = radioButtonMale.Checked ? "Nam" : "Nữ";
+                /*String gender = radioButtonMale.Checked ? "Nam" : "Nữ";*/
 
                     var result =
                         (from s in _db.Members
                             where SqlMethods.Like(s.StudentID, _oldId)
-                            select s).SingleOrDefault();
+                            select s).Single();
 
                     if (!result.StudentID.Equals(textBoxStudentID.Text))
                     {
@@ -206,7 +206,7 @@ namespace Project_KIT_Manager.UI
                             result.Email = richTextBoxEmail.Text;
 
                         //if (!result.Gender.Equals(gender))
-                            result.Gender = gender;
+                            result.Gender = SetGender();
                     }
 
                     _db.SubmitChanges();
@@ -343,10 +343,10 @@ namespace Project_KIT_Manager.UI
                 String newInfo = "Thông tin sẽ được sửa thành:"
                                  + "\nMã Sinh Viên: " + textBoxStudentID.Text
                                  + "\nHọ tên: " + textBoxName.Text
-                                 + "\nGiới Tính: " + (radioButtonMale.Checked ? "Nam" : "Nữ")
+                                 + "\nGiới Tính: " + (SetGender().Equals(String.Empty) ? "Chưa rõ" : SetGender())
                                  + "\nNgày Sinh: " + dateTimePicker.Value.ToString("dd/MM/yyyy")
                                  + "\nLớp: " + textBoxName.Text
-                                 + "\nSố Điện Thoại:" + textBoxPhoneNum.Text
+                                 + "\nSố Điện Thoại: " + textBoxPhoneNum.Text
                                  + "\nGhi Chú: " + richTextBoxEmail.Text;
 
                 DialogResult confirm = DialogResult.None;

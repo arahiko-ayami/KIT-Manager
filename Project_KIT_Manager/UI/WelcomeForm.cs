@@ -5,11 +5,11 @@ namespace Project_KIT_Manager.UI
 {
     public partial class WelcomeForm : Form
     {
-        public string WindowName = Program.ApplicationName;
+        private readonly string _windowName = Program.ApplicationName;
         public WelcomeForm()
         {
             InitializeComponent();
-            this.Text = WindowName;
+            this.Text = _windowName;
         }
 
         private void quảnLíThànhViênToolStripMenuItem_Click(object sender, EventArgs e)

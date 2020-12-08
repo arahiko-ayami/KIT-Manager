@@ -222,11 +222,14 @@
             // 
             // textBoxProjectLeaderID
             // 
+            this.textBoxProjectLeaderID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.textBoxProjectLeaderID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textBoxProjectLeaderID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.textBoxProjectLeaderID.Location = new System.Drawing.Point(169, 324);
             this.textBoxProjectLeaderID.Name = "textBoxProjectLeaderID";
             this.textBoxProjectLeaderID.Size = new System.Drawing.Size(172, 23);
             this.textBoxProjectLeaderID.TabIndex = 63;
+            this.textBoxProjectLeaderID.TextChanged += new System.EventHandler(this.textBoxProjectLeaderID_TextChanged);
             // 
             // labelProjectName
             // 
@@ -249,6 +252,8 @@
             // 
             // textBoxPLeaderName
             // 
+            this.textBoxPLeaderName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.textBoxPLeaderName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textBoxPLeaderName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.textBoxPLeaderName.Location = new System.Drawing.Point(169, 354);
             this.textBoxPLeaderName.Name = "textBoxPLeaderName";
@@ -294,6 +299,7 @@
             this.MaximizeBox = false;
             this.Name = "ProjectManageForm";
             this.Text = "ProjectManageForm";
+            this.Load += new System.EventHandler(this.ProjectManageForm_Load);
             ((System.ComponentModel.ISupportInitialize) (this.dataGridView)).EndInit();
             this.toolStripMenuQLNNC.ResumeLayout(false);
             this.toolStripMenuQLNNC.PerformLayout();
